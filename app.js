@@ -81,8 +81,12 @@ app.post('/register', (req, res) => {
 
 app.get('/logout', (req,res) => {
    // res.send("Logout get");
-   req.logout();
-   res.redirect('/login');
+   req.logout((err) => {
+    if (err) {
+      return res.redirect('/');
+    }
+    res.redirect('/login');
+  });
 })
 
 app.get('/protected', (req,res) => {
